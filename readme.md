@@ -1,4 +1,1 @@
-<<<<<<< HEAD
-=======
-
->>>>>>> 7066ea5868559c8b4b49c0f1ac319437a9074e70
+Waiter Robot simulator using A*, IDS, BFS and its variants, with visualization done using Pygame library.

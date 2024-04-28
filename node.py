@@ -1,27 +1,27 @@
 from state import State
 
-def zero_heuristic(state: State) -> int:
-    return 0
-
 class Node:
+
     children: list['Node']
     action: tuple
     depth: int
     parent: 'Node'
     path_cost: int
 
-    heuristic = zero_heuristic
+    heuristic = 0
 
     def __init__(self, state: State, action=None, depth=0, parent=None, path_cost=0, children=[]):
+
         self.state = state
         self.parent = parent
         self.children = children
-        self.action = action                # Action performed on parent
-        self.depth = depth                  # Depth of this node
-        self.path_cost = path_cost          # Cost from root to here
-        self.is_expanded = False            # Expanded?
+        self.action = action
+        self.depth = depth
+        self.path_cost = path_cost
+        self.is_expanded = False
 
     def expand(self, actions: list[tuple[State, tuple, int]]) -> list['Node']:
+
         children = []
         for action in actions:
             cost = self.path_cost + action[2]
@@ -44,21 +44,25 @@ class Node:
         return self.path_cost + Node.heuristic(self.state)
 
     def __gt__(self, other: 'Node') -> bool:
+
         if not isinstance(other, Node):
             raise TypeError('Error while comparing object with type', type(other), 'and a Node object')
         return self.get_cost() > other.get_cost()
 
     def __ge__(self, other: 'Node') -> bool:
+
         if not isinstance(other, Node):
             raise TypeError('Error while comparing object with type', type(other), 'and a Node object')
         return self.get_cost() >= other.get_cost()
 
     def __lt__(self, other: 'Node') -> bool:
+
         if not isinstance(other, Node):
             raise TypeError('Error while comparing object with type', type(other), 'and a Node object')
         return self.get_cost() < other.get_cost()
 
     def __le__(self, other: 'Node') -> bool:
+        
         if not isinstance(other, Node):
             raise TypeError('Error while comparing object with type', type(other), 'and a Node object')
         return self.get_cost() <= other.get_cost()
